@@ -27,6 +27,12 @@ class PageController extends Controller
         return view('public.programs', compact('programs'));
     }
 
+    public function programDetails(Program $program)
+    {
+        $program->load('trainer');
+        return view('public.program_details', compact('program'));
+    }
+
     public function trainers()
     {
         $trainers = User::where('role', 'trainer')->with('trainerProfile')->paginate(9);

@@ -40,8 +40,13 @@ class ProgramController extends Controller
             'description' => 'nullable|string',
             'duration_weeks' => 'nullable|integer',
             'difficulty_level' => 'required|in:beginner,intermediate,advanced',
-            'image' => 'nullable|url'
+            'category' => 'required|in:fitness,mind_body',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048'
         ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('program_images', 'public');
+        }
 
         $validated['trainer_id'] = auth()->id();
         Program::create($validated);
@@ -73,12 +78,20 @@ class ProgramController extends Controller
             'description' => 'nullable|string',
             'duration_weeks' => 'nullable|integer',
             'difficulty_level' => 'required|in:beginner,intermediate,advanced',
-            'image' => 'nullable|url'
+            'category' => 'required|in:fitness,mind_body',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048'
         ]);
+
+        if ($request->hasFile('image')) {
+            if ($program->image && !str_starts_with($program->image, 'http')) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($program->image);
+            }
+            $validated['image'] = $request->file('image')->store('program_images', 'public');
+        }
 
         $program->update($validated);
 
-        return redirect()->route('dashboard')->with('success', 'Program updated successfully.');
+        return redirect()->route('programs.index')->with('success', 'Program updated successfully.');
     }
 
     public function destroy(Program $program)

@@ -43,5 +43,11 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+
+        <div class="mt-6 text-center border-t border-gray-100 dark:border-gray-800 pt-4">
+            <a class="text-sm text-blue-600 hover:text-blue-900 font-medium" href="{{ route('trainer.login') }}">
+                Are you a trainer? Log in here
+            </a>
+        </div>
     </form>
 </x-guest-layout>

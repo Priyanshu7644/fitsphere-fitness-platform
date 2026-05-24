@@ -36,9 +36,31 @@
                     @auth
                         <a href="{{ url('/dashboard') }}" class="text-gray-900 font-medium hover:text-blue-600 transition">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}" class="text-gray-900 font-medium hover:text-blue-600 transition">Log in</a>
+                        <div class="relative group">
+                            <button class="text-gray-900 font-medium hover:text-blue-600 transition flex items-center h-full py-2">
+                                Log in
+                                <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="absolute right-0 top-full pt-2 w-48 z-50 hidden group-hover:block">
+                                <div class="bg-white rounded-md shadow-lg py-1 border border-gray-100">
+                                    <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">User Login</a>
+                                    <a href="{{ route('trainer.login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Trainer Login</a>
+                                </div>
+                            </div>
+                        </div>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-full font-medium transition shadow-lg shadow-blue-500/30">Join Now</a>
+                            <div class="relative group ml-4">
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-full font-medium transition shadow-lg shadow-blue-500/30 flex items-center">
+                                    Join Now
+                                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </button>
+                                <div class="absolute right-0 top-full pt-2 w-48 z-50 hidden group-hover:block">
+                                    <div class="bg-white rounded-md shadow-lg py-1 border border-gray-100">
+                                        <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign Up as User</a>
+                                        <a href="{{ route('trainer.register') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Become a Trainer</a>
+                                    </div>
+                                </div>
+                            </div>
                         @endif
                     @endauth
                 </div>

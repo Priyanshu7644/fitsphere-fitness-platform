@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/programs', [PageController::class, 'programs'])->name('public.programs');
+Route::get('/programs/{program}', [PageController::class, 'programDetails'])->name('public.programs.show');
 Route::get('/trainers', [PageController::class, 'trainers'])->name('public.trainers');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 
@@ -34,8 +35,8 @@ Route::middleware('auth')->group(function () {
     // Modules
     Route::prefix('manage')->group(function () {
         Route::resource('programs', ProgramController::class);
-        Route::resource('workouts', WorkoutController::class);
-        Route::resource('diet-plans', DietPlanController::class);
+        Route::resource('programs.workouts', WorkoutController::class)->except(['index']);
+        Route::resource('programs.diet-plans', DietPlanController::class)->except(['index']);
         Route::resource('live-sessions', LiveSessionController::class);
     });
 });
