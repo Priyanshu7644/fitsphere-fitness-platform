@@ -1,59 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# FitSphere - Premium Fitness & Gym Management Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+FitSphere is a modern, comprehensive web application built with Laravel and Tailwind CSS for managing fitness centers, trainers, users, and e-commerce. Designed with a sleek, premium UI (inspired by platforms like Cult.fit), it provides everything needed to run a professional fitness business.
 
-## About Laravel
+![FitSphere Dashboard Overview](public/images/hero-bg.jpg)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🌟 Key Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### For Users
+- **Browse Programs & Live Sessions:** Discover and enroll in yoga, HIIT, strength training, and more.
+- **E-Commerce Store:** Shop for fitness gear, supplements, and apparel with a sleek, sliding AJAX cart.
+- **Gym Passes & Physical Centers:** Buy elite, pro, and home passes, and locate physical gym centers.
+- **User Dashboard:** Track enrolled programs, live sessions, and view purchased passes.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### For Trainers
+- **Program Management:** Create and manage fitness programs, including nested Workouts and Diet Plans.
+- **Live Sessions:** Schedule and host live interactive fitness sessions.
+- **Trainer Dashboard:** Monitor enrollments and manage their schedules directly.
 
-## Learning Laravel
+### For Admins
+- **Complete Platform Control:** Manage users, assign trainer roles, and oversee all platform activities.
+- **E-Commerce Inventory:** Add and manage products, stock levels, and categories.
+- **Passes & Centers:** Manage the pricing tiers for passes and the locations of physical centers.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 🚀 Tech Stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Backend:** Laravel 11.x (PHP 8.2+)
+- **Frontend:** Tailwind CSS, Blade Templates, Vanilla JS (AJAX)
+- **Database:** SQLite (Default for easy setup) / MySQL / PostgreSQL
+- **Icons & Fonts:** Heroicons, Google Fonts (Inter, Outfit)
 
-## Laravel Sponsors
+## 📦 Installation & Setup
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Follow these steps to get the project running locally.
 
-### Premium Partners
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-username/fitsphere.git
+cd fitsphere
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 2. Install PHP & Node Dependencies
+```bash
+composer install
+npm install
+npm run build
+```
 
-## Contributing
+### 3. Environment Configuration
+Copy the example environment file and generate your application key:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. Database Setup
+The project is configured to use SQLite by default. Run the migrations and seed the database with mock data, products, and users:
+```bash
+php artisan migrate:fresh --seed
+```
 
-## Code of Conduct
+> **Note:** The seeder will automatically create an Admin, a Trainer, and a regular User for you, along with mock products, programs, and passes.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 5. Start the Application
+Run the local development server:
+```bash
+php artisan serve
+```
 
-## Security Vulnerabilities
+Your application will be available at `http://localhost:8000`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🔐 Default Test Accounts
 
-## License
+Use these credentials to test different roles (password for all is `password`):
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Admin:** `admin@fitsphere.com`
+- **Trainer:** `trainer@fitsphere.com`
+- **User:** `user@fitsphere.com`
+
+## 📁 Directory Structure Highlights
+
+- `app/Http/Controllers/` - Contains all business logic (Dashboard, Store, Programs, etc.)
+- `resources/views/` - All Blade templates, beautifully styled with Tailwind CSS.
+  - `layouts/` - Master layouts including public and authenticated dashboards.
+  - `store/` - E-commerce pages including the sliding AJAX cart.
+- `public/images/` - Local assets for mock products, hero banners, and centers.
+- `routes/web.php` - Cleanly organized web routes with Role-Based Access Control middleware.
+
+## 🤝 Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## 📄 License
+
+[MIT](https://choosealicense.com/licenses/mit/)
