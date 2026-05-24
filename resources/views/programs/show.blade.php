@@ -68,28 +68,56 @@
 
             </div>
 
-            <!-- Future area for Workouts and Diet Plans -->
-            @if(auth()->id() === $program->trainer_id || auth()->user()->role === 'admin')
+            <!-- Area for Workouts and Diet Plans -->
             <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Workouts -->
                 <div class="bg-white overflow-hidden shadow-sm rounded-xl border border-gray-100 p-6">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-bold text-gray-900">Workouts</h3>
-                        <a href="#" class="text-sm text-blue-600 hover:text-blue-800 font-medium">+ Add Workout</a>
+                        @if(auth()->id() === $program->trainer_id || auth()->user()->role === 'admin')
+                        <a href="{{ route('programs.workouts.create', $program) }}" class="text-sm text-blue-600 hover:text-blue-800 font-medium">+ Add Workout</a>
+                        @endif
                     </div>
-                    <p class="text-gray-500 text-sm italic">Workout management coming soon...</p>
+                    @if($program->workouts->count() > 0)
+                        <ul class="space-y-3">
+                            @foreach($program->workouts as $workout)
+                            <li class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                                <span class="font-bold text-sm text-blue-600 uppercase tracking-wider">Day {{ $workout->day_number }}</span>
+                                <h4 class="font-semibold text-gray-800">{{ $workout->title }}</h4>
+                                <p class="text-sm text-gray-600 mt-1">{{ Str::limit($workout->description, 50) }}</p>
+                            </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <p class="text-gray-500 text-sm italic">No workouts added yet.</p>
+                    @endif
                 </div>
 
                 <!-- Diet Plans -->
                 <div class="bg-white overflow-hidden shadow-sm rounded-xl border border-gray-100 p-6">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-bold text-gray-900">Diet Plans</h3>
-                        <a href="#" class="text-sm text-blue-600 hover:text-blue-800 font-medium">+ Add Diet Plan</a>
+                        @if(auth()->id() === $program->trainer_id || auth()->user()->role === 'admin')
+                        <a href="{{ route('programs.diet-plans.create', $program) }}" class="text-sm text-blue-600 hover:text-blue-800 font-medium">+ Add Diet Plan</a>
+                        @endif
                     </div>
-                    <p class="text-gray-500 text-sm italic">Diet plan management coming soon...</p>
+                    @if($program->dietPlans->count() > 0)
+                        <ul class="space-y-3">
+                            @foreach($program->dietPlans as $dietPlan)
+                            <li class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                                <div class="flex justify-between">
+                                    <h4 class="font-semibold text-gray-800">{{ $dietPlan->meal_schedule }}</h4>
+                                    <span class="text-sm font-bold text-green-600">{{ $dietPlan->calories }} kcal</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-1">Protein: {{ $dietPlan->protein }}g</p>
+                            </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <p class="text-gray-500 text-sm italic">No diet plans added yet.</p>
+                    @endif
                 </div>
             </div>
-            @endif
 
         </div>
     </div>

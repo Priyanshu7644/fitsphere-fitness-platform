@@ -9,19 +9,11 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\Auth\TrainerAuthenticatedSessionController;
-use App\Http\Controllers\Auth\TrainerRegisteredUserController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    // Trainer Auth Routes
-    Route::get('trainer/register', [TrainerRegisteredUserController::class, 'create'])
-        ->name('trainer.register');
-    Route::post('trainer/register', [TrainerRegisteredUserController::class, 'store']);
 
-    Route::get('trainer/login', [TrainerAuthenticatedSessionController::class, 'create'])
-        ->name('trainer.login');
-    Route::post('trainer/login', [TrainerAuthenticatedSessionController::class, 'store']);
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 

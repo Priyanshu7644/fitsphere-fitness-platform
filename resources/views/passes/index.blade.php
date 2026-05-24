@@ -28,7 +28,7 @@
                 <div class="text-slate-400 mb-6 flex-grow">{{ $pass->description }}</div>
                 
                 <div class="text-4xl font-extrabold mb-6">
-                    ${{ number_format($pass->price, 2) }}
+                    ₹{{ number_format($pass->price, 0) }}
                     <span class="text-lg font-normal text-slate-500">/ {{ $pass->duration_days }} days</span>
                 </div>
                 
@@ -48,7 +48,7 @@
                     @endif
                 </ul>
                 
-                <button class="w-full py-4 rounded-xl font-bold text-white bg-gradient-to-r from-rose-600 to-orange-500 hover:from-rose-500 hover:to-orange-400 transition-all shadow-lg shadow-rose-500/30">Get {{ ucfirst($pass->type) }} Pass</button>
+                <a href="{{ route('public.passes.show', $pass->id) }}" class="block text-center w-full py-4 rounded-xl font-bold text-white {{ $pass->type == 'elite' ? 'bg-gradient-to-r from-rose-600 to-orange-500 hover:from-rose-500 hover:to-orange-400 transition-all shadow-lg shadow-rose-500/30' : 'bg-slate-800 hover:bg-slate-700 transition-all' }}">Get {{ ucfirst($pass->type) }} Pass</a>
             </div>
         @empty
             <!-- Fallback Mock Data -->

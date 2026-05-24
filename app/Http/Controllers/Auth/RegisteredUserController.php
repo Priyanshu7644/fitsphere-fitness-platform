@@ -34,13 +34,24 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'in:user,trainer'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role,
         ]);
+
+        if ($request->role === 'trainer') {
+            \App\Models\TrainerProfile::create([
+                'user_id' => $user->id,
+                'specialization' => 'Fitness Trainer',
+                'experience' => 'New Trainer',
+                'certification' => 'Certified Trainer'
+            ]);
+        }
 
         event(new Registered($user));
 

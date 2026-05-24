@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Program;
 use App\Models\User;
+use App\Models\LiveSession;
+use App\Models\Pass;
 
 class PageController extends Controller
 {
@@ -12,7 +14,8 @@ class PageController extends Controller
     {
         $featuredPrograms = Program::with('trainer')->take(3)->get();
         $trainers = User::where('role', 'trainer')->take(3)->get();
-        return view('public.home', compact('featuredPrograms', 'trainers'));
+        $passes = Pass::take(3)->get();
+        return view('public.home', compact('featuredPrograms', 'trainers', 'passes'));
     }
 
     public function about()
@@ -42,5 +45,17 @@ class PageController extends Controller
     public function contact()
     {
         return view('public.contact');
+    }
+
+    public function liveSessions()
+    {
+        $liveSessions = LiveSession::with('trainer')->where('session_date', '>=', now())->orderBy('session_date', 'asc')->paginate(9);
+        return view('public.live_sessions', compact('liveSessions'));
+    }
+
+    public function liveSessionDetails(LiveSession $liveSession)
+    {
+        $liveSession->load('trainer');
+        return view('public.live_session_details', compact('liveSession'));
     }
 }

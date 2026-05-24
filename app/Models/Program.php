@@ -26,9 +26,6 @@ class Program extends Model
     public function dietPlans() {
         return $this->hasMany(DietPlan::class);
     }
-    public function dietPlans() {
-        return $this->hasMany(DietPlan::class);
-    }
     public function enrollments() {
         return $this->hasMany(Enrollment::class);
     }
