@@ -8,6 +8,10 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\WorkoutController;
 use App\Http\Controllers\DietPlanController;
 use App\Http\Controllers\LiveSessionController;
+use App\Http\Controllers\PassController;
+use App\Http\Controllers\CenterController;
+use App\Http\Controllers\AdminPassController;
+use App\Http\Controllers\AdminCenterController;
 use Illuminate\Support\Facades\Route;
 
 // Public Pages
@@ -17,6 +21,9 @@ Route::get('/programs', [PageController::class, 'programs'])->name('public.progr
 Route::get('/programs/{program}', [PageController::class, 'programDetails'])->name('public.programs.show');
 Route::get('/trainers', [PageController::class, 'trainers'])->name('public.trainers');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+
+Route::get('/passes', [PassController::class, 'index'])->name('public.passes');
+Route::get('/centers', [CenterController::class, 'index'])->name('public.centers');
 
 // Dashboard Routing
 Route::get('/dashboard', [DashboardController::class, 'index'])
@@ -33,11 +40,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/programs/{program}/enroll', [ProgramController::class, 'enroll'])->name('programs.enroll');
 
     // Modules
-    Route::prefix('manage')->group(function () {
+    Route::prefix('manage')->name('admin.')->group(function () {
         Route::resource('programs', ProgramController::class);
         Route::resource('programs.workouts', WorkoutController::class)->except(['index']);
         Route::resource('programs.diet-plans', DietPlanController::class)->except(['index']);
         Route::resource('live-sessions', LiveSessionController::class);
+        Route::resource('passes', AdminPassController::class);
+        Route::resource('centers', AdminCenterController::class);
     });
 });
 
