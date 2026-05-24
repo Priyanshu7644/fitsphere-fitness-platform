@@ -57,3 +57,17 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function() {
 });
 
 require __DIR__.'/auth.php';
+
+use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\StoreController;
+
+Route::get('/store', [StoreController::class, 'index'])->name('store.index');
+Route::post('/store/cart/add/{product}', [StoreController::class, 'addToCart'])->name('store.add');
+Route::get('/store/cart', [StoreController::class, 'cart'])->name('store.cart');
+Route::post('/store/cart/update', [StoreController::class, 'updateCart'])->name('store.cart.update');
+Route::post('/store/cart/remove', [StoreController::class, 'removeFromCart'])->name('store.cart.remove');
+
+Route::middleware(['auth'])->prefix('manage')->name('admin.')->group(function () {
+    Route::resource('products', AdminProductController::class);
+});
+

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -30,6 +30,7 @@
                     <a href="{{ route('about') }}" class="text-gray-500 inline-flex items-center px-1 pt-1 font-medium hover:text-blue-600 transition">About</a>
                     <a href="{{ route('public.programs') }}" class="text-gray-500 inline-flex items-center px-1 pt-1 font-medium hover:text-blue-600 transition">Programs</a>
                     <a href="{{ route('public.trainers') }}" class="text-gray-500 inline-flex items-center px-1 pt-1 font-medium hover:text-blue-600 transition">Trainers</a>
+                    <a href="{{ route('store.index') }}" class="text-gray-500 inline-flex items-center px-1 pt-1 font-medium hover:text-blue-600 transition">Store</a>
                     <a href="{{ route('contact') }}" class="text-gray-500 inline-flex items-center px-1 pt-1 font-medium hover:text-blue-600 transition">Contact</a>
                 </div>
                 <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
@@ -91,6 +92,7 @@
                                 <li><a href="{{ route('home') }}" class="text-base text-gray-400 hover:text-white transition">Home</a></li>
                                 <li><a href="{{ route('about') }}" class="text-base text-gray-400 hover:text-white transition">About</a></li>
                                 <li><a href="{{ route('public.programs') }}" class="text-base text-gray-400 hover:text-white transition">Programs</a></li>
+                                <li><a href="{{ route('store.index') }}" class="text-base text-gray-400 hover:text-white transition">Store</a></li>
                             </ul>
                         </div>
                         <div class="mt-12 md:mt-0">
@@ -113,3 +115,4 @@
     </footer>
 </body>
 </html>
+
